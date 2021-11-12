@@ -6,6 +6,8 @@ import Navigation from './Pages/Home/Navigation/Navigation';
 import AboutUs from './Pages/Home/AboutUs/AboutUs';
 import Service from './Pages/Home/Service/Service';
 import Products from './Pages/Products/Products/Products';
+import Footer from './Pages/Shared/Footer/Footer';
+import Login from './Pages/Authentication/Login/Login';
 
 function App() {
     return (
@@ -18,7 +20,11 @@ function App() {
                 <Route path="/products">
                     <Products />
                 </Route>
+                <Route path="/login">
+                    <Login />
+                </Route>
             </Switch>
+            <Footer />
         </Router>
     );
 }

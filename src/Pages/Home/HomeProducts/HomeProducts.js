@@ -7,46 +7,61 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 const products = [
     {
+        id: 1,
         product_name: 'Real Madrid Trophies wall clock',
         img: product_img,
         price: '690'
     },
     {
+        id: 2,
         product_name: 'Real Madrid Trophies wall clock',
         img: product_img,
         price: '690'
     },
     {
+        id: 3,
         product_name: 'Real Madrid Trophies wall clock',
         img: product_img,
         price: '690'
     },
     {
+        id: 4,
         product_name: 'Real Madrid Trophies wall clock',
         img: product_img,
         price: '690'
     },
     {
+        id: 5,
         product_name: 'Real Madrid Trophies wall clock',
         img: product_img,
         price: '690'
     },
     {
+        id: 6,
         product_name: 'Real Madrid Trophies wall clock',
         img: product_img,
         price: '690'
     },
     {
+        id: 7,
         product_name: 'Real Madrid Trophies wall clock',
         img: product_img,
         price: '690'
     },
     {
+        id: 8,
         product_name: 'Real Madrid Trophies wall clock',
         img: product_img,
         price: '690'
     },
     {
+        id: 9,
+        product_name: 'Real Madrid Trophies wall clock',
+        img: product_img,
+        price: '690'
+    },
+    {
+        id: 10,
         product_name: 'Real Madrid Trophies wall clock',
         img: product_img,
         price: '690'

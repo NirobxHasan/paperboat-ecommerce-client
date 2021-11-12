@@ -14,7 +14,7 @@ const Product = (props) => {
     const theme = createTheme({
         palette: {
             primary: {
-                main: '#212121'
+                main: '#519071'
             },
             secondary: {
                 main: '#fff59d'

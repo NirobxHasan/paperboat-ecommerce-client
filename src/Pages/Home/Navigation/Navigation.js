@@ -59,7 +59,9 @@ const Navigation = () => {
                             edge="start"
                             color="inherit"
                             aria-label="menu"
-                            sx={{ mr: 2 }}
+                            sx={{
+                                mr: 2
+                            }}
                             onClick={() => setState(true)}
                         >
                             <MenuIcon />
@@ -68,7 +70,12 @@ const Navigation = () => {
                             className={navLogo}
                             variant="h5"
                             component="div"
-                            sx={{ flexGrow: 1 }}
+                            sx={{
+                                flexGrow: 1,
+                                fontWeight: 600,
+                                color: '#519071',
+                                textTransform: 'uppercase'
+                            }}
                         >
                             Paperboat
                         </Typography>
@@ -82,8 +89,8 @@ const Navigation = () => {
                             <Link className={navItem} to="/about">
                                 <Button color="inherit">About</Button>
                             </Link>
-                            <Link className={navItem} to="/about">
-                                <Button color="inherit">About</Button>
+                            <Link className={navItem} to="/login">
+                                <Button color="inherit">Login</Button>
                             </Link>
                         </Box>
                     </Toolbar>
@@ -124,6 +131,16 @@ const Navigation = () => {
                                             to="/about"
                                         >
                                             About
+                                        </Link>
+                                    </ListItemText>
+                                </ListItem>
+                                <ListItem button>
+                                    <ListItemText>
+                                        <Link
+                                            className={mobileNavItem}
+                                            to="/login"
+                                        >
+                                            Login
                                         </Link>
                                     </ListItemText>
                                 </ListItem>
