@@ -8,6 +8,7 @@ import Service from './Pages/Home/Service/Service';
 import Products from './Pages/Products/Products/Products';
 import Footer from './Pages/Shared/Footer/Footer';
 import Login from './Pages/Authentication/Login/Login';
+import Registration from './Pages/Authentication/Registration/Registration';
 
 function App() {
     return (
@@ -22,6 +23,9 @@ function App() {
                 </Route>
                 <Route path="/login">
                     <Login />
+                </Route>
+                <Route path="/registration">
+                    <Registration />
                 </Route>
             </Switch>
             <Footer />
