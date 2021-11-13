@@ -14,6 +14,7 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import useAuth from '../../../hooks/useAuth';
 
 const Navigation = () => {
     const theme = useTheme();
@@ -47,6 +48,8 @@ const Navigation = () => {
         useStyles();
 
     const [state, setState] = React.useState(false);
+
+    const { user, logOut } = useAuth();
 
     return (
         <>
@@ -89,9 +92,38 @@ const Navigation = () => {
                             <Link className={navItem} to="/about">
                                 <Button color="inherit">About</Button>
                             </Link>
-                            <Link className={navItem} to="/login">
-                                <Button color="inherit">Login</Button>
-                            </Link>
+
+                            {user.displayName && (
+                                <Typography
+                                    sx={{
+                                        display: 'inline',
+                                        mx: 2,
+                                        color: '#519071'
+                                    }}
+                                    variant="subtitle1"
+                                    gutterBottom
+                                >
+                                    {user.displayName}
+                                </Typography>
+                            )}
+
+                            {!user.email ? (
+                                <Link
+                                    sx={{ fontWeight: 600 }}
+                                    className={navItem}
+                                    to="/login"
+                                >
+                                    <Button color="inherit">Login</Button>
+                                </Link>
+                            ) : (
+                                <Button
+                                    sx={{ fontWeight: 600 }}
+                                    onClick={logOut}
+                                    color="inherit"
+                                >
+                                    logout
+                                </Button>
+                            )}
                         </Box>
                     </Toolbar>
                 </AppBar>
@@ -134,16 +166,47 @@ const Navigation = () => {
                                         </Link>
                                     </ListItemText>
                                 </ListItem>
-                                <ListItem button>
-                                    <ListItemText>
-                                        <Link
-                                            className={mobileNavItem}
-                                            to="/login"
-                                        >
-                                            Login
-                                        </Link>
-                                    </ListItemText>
-                                </ListItem>
+
+                                {user.displayName && (
+                                    <ListItem button>
+                                        <ListItemText>
+                                            <Typography
+                                                sx={{
+                                                    display: 'inline',
+                                                    mx: 2,
+                                                    color: '#519071'
+                                                }}
+                                                variant="subtitle1"
+                                                gutterBottom
+                                            >
+                                                {user.displayName}
+                                            </Typography>
+                                        </ListItemText>
+                                    </ListItem>
+                                )}
+                                {!user.email ? (
+                                    <ListItem button>
+                                        <ListItemText>
+                                            <Link
+                                                className={mobileNavItem}
+                                                to="/login"
+                                            >
+                                                Login
+                                            </Link>
+                                        </ListItemText>
+                                    </ListItem>
+                                ) : (
+                                    <ListItem button>
+                                        <ListItemText>
+                                            <Button
+                                                onClick={logOut}
+                                                color="inherit"
+                                            >
+                                                Logout
+                                            </Button>
+                                        </ListItemText>
+                                    </ListItem>
+                                )}
                             </List>
                         </Box>
                     </Drawer>

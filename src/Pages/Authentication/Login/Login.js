@@ -1,4 +1,5 @@
 import {
+    Alert,
     Button,
     Container,
     Grid,
@@ -8,12 +9,15 @@ import {
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
+import useFirebase from '../../../hooks/useFirebase';
 
 const Login = () => {
     const [loginInfo, setLoginInfo] = useState({});
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const history = useHistory();
+    const location = useLocation();
+    const { authError, emailLogin, googleLogin } = useAuth();
     const handleFromChange = (e) => {
         const field = e.target.name;
         const value = e.target.value;
@@ -23,6 +27,7 @@ const Login = () => {
         console.log(loginInfo);
     };
     const handleLoginForm = (e) => {
+        emailLogin(loginInfo.email, loginInfo.password, history, location);
         e.preventDefault();
     };
     return (
@@ -83,9 +88,15 @@ const Login = () => {
                         </Button>
                     </Box>
 
-                    <Button sx={{ my: 3 }} color="success" variant="outlined">
+                    <Button
+                        onClick={() => googleLogin(history, location)}
+                        sx={{ my: 3 }}
+                        color="success"
+                        variant="outlined"
+                    >
                         Google Login
                     </Button>
+                    {authError && <Alert severity="error">{authError}</Alert>}
 
                     <Box>
                         <Link

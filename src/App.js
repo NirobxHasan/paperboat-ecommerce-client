@@ -9,27 +9,32 @@ import Products from './Pages/Products/Products/Products';
 import Footer from './Pages/Shared/Footer/Footer';
 import Login from './Pages/Authentication/Login/Login';
 import Registration from './Pages/Authentication/Registration/Registration';
+import AuthProvider from './context/AuthProvider';
 
 function App() {
     return (
-        <Router>
-            <Navigation />
+        <>
+            <AuthProvider>
+                <Router>
+                    <Navigation />
 
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/home" component={Home} />
-                <Route path="/products">
-                    <Products />
-                </Route>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/registration">
-                    <Registration />
-                </Route>
-            </Switch>
-            <Footer />
-        </Router>
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/home" component={Home} />
+                        <Route path="/products">
+                            <Products />
+                        </Route>
+                        <Route path="/login">
+                            <Login />
+                        </Route>
+                        <Route path="/registration">
+                            <Registration />
+                        </Route>
+                    </Switch>
+                    <Footer />
+                </Router>
+            </AuthProvider>
+        </>
     );
 }
 

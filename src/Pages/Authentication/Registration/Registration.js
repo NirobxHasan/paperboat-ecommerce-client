@@ -10,10 +10,14 @@ import {
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import useAuth from '../../../hooks/useAuth';
+import { useHistory, useLocation } from 'react-router-dom';
 const Registration = () => {
     const [loginInfo, setLoginInfo] = useState({});
     const [error, setError] = useState('');
+    const history = useHistory();
+    const location = useLocation();
+    const { googleLogin, authError, register } = useAuth();
 
     const handleFromChange = (e) => {
         const field = e.target.name;
@@ -29,6 +33,7 @@ const Registration = () => {
             setError("Password doesn't match!");
             return;
         }
+        register(loginInfo.email, loginInfo.password, loginInfo.name, history);
 
         e.preventDefault();
     };
@@ -111,8 +116,14 @@ const Registration = () => {
                         </Button>
                     </Box>
                     {error && <Alert severity="error">{error}</Alert>}
+                    {authError && <Alert severity="error">{authError}</Alert>}
 
-                    <Button sx={{ my: 2 }} color="success" variant="outlined">
+                    <Button
+                        onClick={() => googleLogin(history, location)}
+                        sx={{ my: 2 }}
+                        color="success"
+                        variant="outlined"
+                    >
                         Google Login
                     </Button>
 
