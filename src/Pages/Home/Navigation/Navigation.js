@@ -93,6 +93,12 @@ const Navigation = () => {
                                 <Button color="inherit">About</Button>
                             </Link>
 
+                            {user.email && (
+                                <Link className={navItem} to="/userdashboard">
+                                    <Button color="inherit">Dashboard</Button>
+                                </Link>
+                            )}
+
                             {user.displayName && (
                                 <Typography
                                     sx={{
@@ -136,10 +142,7 @@ const Navigation = () => {
                             <List>
                                 <ListItem button>
                                     <ListItemText>
-                                        <Link
-                                            className={mobileNavItem}
-                                            to="/home"
-                                        >
+                                        <Link className={mobileNavItem} to="/">
                                             Home
                                         </Link>
                                     </ListItemText>
@@ -166,6 +169,18 @@ const Navigation = () => {
                                         </Link>
                                     </ListItemText>
                                 </ListItem>
+                                {user.email && (
+                                    <ListItem button>
+                                        <ListItemText>
+                                            <Link
+                                                className={mobileNavItem}
+                                                to="/userdashboard"
+                                            >
+                                                Dashboard
+                                            </Link>
+                                        </ListItemText>
+                                    </ListItem>
+                                )}
 
                                 {user.displayName && (
                                     <ListItem button>

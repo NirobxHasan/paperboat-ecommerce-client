@@ -9,6 +9,7 @@ import {
     Typography
 } from '@mui/material';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Product = (props) => {
     const theme = createTheme({
@@ -21,7 +22,7 @@ const Product = (props) => {
             }
         }
     });
-    const { product_name, img, price } = props.product;
+    const { _id, title, img, price } = props.product;
 
     return (
         <Grid item xs={12} sm={6} md={4} lg={4}>
@@ -29,7 +30,7 @@ const Product = (props) => {
                 <CardMedia component="img" height="258" image={img} />
                 <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
-                        {product_name}
+                        {title.slice(0, 32)}..
                     </Typography>
                     <Typography
                         variant="subtitle1"
@@ -41,11 +42,20 @@ const Product = (props) => {
                     </Typography>
                 </CardContent>
                 <CardActions
-                    sx={{ display: 'flex', flexDirection: 'row-reverse' }}
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row-reverse',
+                        alignItems: 'flex-end'
+                    }}
                 >
-                    <Button variant="outlined" size="small" theme={theme}>
-                        Buy Now
-                    </Button>
+                    <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/products/${_id}`}
+                    >
+                        <Button variant="outlined" size="small" theme={theme}>
+                            Buy Now
+                        </Button>
+                    </Link>
                 </CardActions>
             </Card>
         </Grid>

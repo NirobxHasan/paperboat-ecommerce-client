@@ -10,6 +10,9 @@ import Footer from './Pages/Shared/Footer/Footer';
 import Login from './Pages/Authentication/Login/Login';
 import Registration from './Pages/Authentication/Registration/Registration';
 import AuthProvider from './context/AuthProvider';
+import PurchaseProduct from './Pages/Products/PurchaseProduct/PurchaseProduct';
+import PrivateRoute from './Pages/Authentication/PrivateRoute/PrivateRoute';
+import UserDashboard from './Pages/UserDashboard/UserDashboard/UserDashboard';
 
 function App() {
     return (
@@ -21,9 +24,15 @@ function App() {
                     <Switch>
                         <Route exact path="/" component={Home} />
                         <Route path="/home" component={Home} />
-                        <Route path="/products">
+                        <Route exact path="/products">
                             <Products />
                         </Route>
+                        <PrivateRoute path="/products/:id">
+                            <PurchaseProduct />
+                        </PrivateRoute>
+                        <PrivateRoute path="/userdashboard">
+                            <UserDashboard />
+                        </PrivateRoute>
                         <Route path="/login">
                             <Login />
                         </Route>
