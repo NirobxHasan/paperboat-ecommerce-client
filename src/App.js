@@ -22,25 +22,34 @@ function App() {
                     <Navigation />
 
                     <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/home" component={Home} />
+                        <Route exact path="/">
+                            <Home />
+                            <Footer />
+                        </Route>
+                        <Route path="/home">
+                            <Home />
+                            <Footer />
+                        </Route>
                         <Route exact path="/products">
                             <Products />
+                            <Footer />
                         </Route>
                         <PrivateRoute path="/products/:id">
                             <PurchaseProduct />
+                            <Footer />
                         </PrivateRoute>
                         <PrivateRoute path="/userdashboard">
                             <UserDashboard />
                         </PrivateRoute>
                         <Route path="/login">
                             <Login />
+                            <Footer />
                         </Route>
                         <Route path="/registration">
                             <Registration />
+                            <Footer />
                         </Route>
                     </Switch>
-                    <Footer />
                 </Router>
             </AuthProvider>
         </>

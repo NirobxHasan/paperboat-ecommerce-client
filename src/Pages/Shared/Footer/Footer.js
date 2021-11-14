@@ -17,7 +17,14 @@ const Footer = () => {
     const { footerLink, input } = useStyles();
 
     return (
-        <Box sx={{ mt: 8, backgroundColor: '#212121', color: '#ffff' }}>
+        <Box
+            sx={{
+                mt: 8,
+                backgroundColor: '#212121',
+                color: '#ffff',
+                mt: 8
+            }}
+        >
             <Grid container spacing={2} sx={{ p: 5 }}>
                 <Grid item xs={12} sm={6} md={3} lg={3}>
                     <Typography
