@@ -3,11 +3,10 @@ import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 const axios = require('axios');
-const ManageOrder = () => {
+const ManageProducts = () => {
     const [products, setProducts] = useState([]);
-    const { user } = useAuth();
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user.email}`)
+        fetch('http://localhost:5000/products')
             .then((res) => res.json())
             .then((data) => setProducts(data));
     }, []);
@@ -18,7 +17,7 @@ const ManageOrder = () => {
             return;
         }
 
-        axios.delete(`http://localhost:5000/orders/${id}`).then((res) => {
+        axios.delete(`http://localhost:5000/products/${id}`).then((res) => {
             console.log(res);
             if (res.data.deletedCount === 1) {
                 const restOrder = products.filter(
@@ -28,10 +27,11 @@ const ManageOrder = () => {
             }
         });
     };
+
     return (
         <div>
             <Typography variant="h5" gutterBottom component="div">
-                Manage your order
+                Manage all Products
             </Typography>
             {products.map((product) => (
                 <Paper
@@ -88,20 +88,14 @@ const ManageOrder = () => {
                             lg={4}
                         >
                             <Box>
-                                {product.status !== 'shipped' ? (
-                                    <Button
-                                        sx={{ alignSelf: 'center' }}
-                                        onClick={() =>
-                                            handleDelete(product._id)
-                                        }
-                                        variant="contained"
-                                        color="error"
-                                    >
-                                        Cancel
-                                    </Button>
-                                ) : (
-                                    ''
-                                )}
+                                <Button
+                                    sx={{ alignSelf: 'center' }}
+                                    onClick={() => handleDelete(product._id)}
+                                    variant="contained"
+                                    color="error"
+                                >
+                                    Delete
+                                </Button>
                             </Box>
                         </Grid>
                     </Grid>
@@ -111,4 +105,4 @@ const ManageOrder = () => {
     );
 };
 
-export default ManageOrder;
+export default ManageProducts;

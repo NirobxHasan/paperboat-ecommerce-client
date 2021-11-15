@@ -1,15 +1,17 @@
 import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import useAuth from '../../../hooks/useAuth';
+import { useHistory, useLocation } from 'react-router';
 const axios = require('axios');
-const ManageOrder = () => {
-    const [products, setProducts] = useState([]);
-    const { user } = useAuth();
+const ManageAllOrders = () => {
+    const [orders, setOrders] = useState([]);
+    const [shipped, setShipped] = useState(false);
+    const history = useHistory();
+    const location = useLocation();
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user.email}`)
+        fetch('http://localhost:5000/allOrders')
             .then((res) => res.json())
-            .then((data) => setProducts(data));
+            .then((data) => setOrders(data));
     }, []);
 
     const handleDelete = (id) => {
@@ -21,21 +23,34 @@ const ManageOrder = () => {
         axios.delete(`http://localhost:5000/orders/${id}`).then((res) => {
             console.log(res);
             if (res.data.deletedCount === 1) {
-                const restOrder = products.filter(
+                const restOrder = orders.filter(
                     (product) => product._id !== id
                 );
-                setProducts(restOrder);
+                setOrders(restOrder);
             }
         });
+    };
+
+    const handleShipping = (id) => {
+        fetch(`http://localhost:5000/orders/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'shipped' })
+        })
+            .then((res) => res.json())
+            .then((data) => {});
+        window.location.reload();
     };
     return (
         <div>
             <Typography variant="h5" gutterBottom component="div">
-                Manage your order
+                Manage all orders
             </Typography>
-            {products.map((product) => (
+            {orders.map((order) => (
                 <Paper
-                    key={products._id}
+                    key={order._id}
                     sx={
                         {
                             // display: 'flex',
@@ -47,7 +62,7 @@ const ManageOrder = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12} md={4} lg={4}>
                             <Box>
-                                <img width="150" src={product.img} alt="" />
+                                <img width="150" src={order.img} alt="" />
                             </Box>
                         </Grid>
                         <Grid item xs={12} sm={12} md={4} lg={4}>
@@ -57,7 +72,7 @@ const ManageOrder = () => {
                                     gutterBottom
                                     component="div"
                                 >
-                                    {product.product_title}
+                                    {order.product_title}
                                 </Typography>
                                 <Typography
                                     variant="subtitle1"
@@ -65,14 +80,22 @@ const ManageOrder = () => {
                                     component="div"
                                     sx={{ fontWeight: 'bold' }}
                                 >
-                                    Price: {product.price}
+                                    Price: {order.price}
+                                </Typography>
+                                <Typography
+                                    variant="subtitle1"
+                                    gutterBottom
+                                    component="div"
+                                    sx={{ fontWeight: 'bold' }}
+                                >
+                                    Order by: {order.Name}
                                 </Typography>
                                 <Typography
                                     variant="button"
                                     display="block"
                                     gutterBottom
                                 >
-                                    status: {product.status}
+                                    status: {order.status}
                                 </Typography>
                             </Box>
                         </Grid>
@@ -87,17 +110,25 @@ const ManageOrder = () => {
                             md={4}
                             lg={4}
                         >
-                            <Box>
-                                {product.status !== 'shipped' ? (
+                            <Box sx={{ m: 2 }}>
+                                <Button
+                                    sx={{ alignSelf: 'center', mr: 2 }}
+                                    onClick={() => handleDelete(order._id)}
+                                    variant="contained"
+                                    color="error"
+                                >
+                                    Cancel
+                                </Button>
+                                {order.status !== 'shipped' ? (
                                     <Button
                                         sx={{ alignSelf: 'center' }}
                                         onClick={() =>
-                                            handleDelete(product._id)
+                                            handleShipping(order._id)
                                         }
                                         variant="contained"
                                         color="error"
                                     >
-                                        Cancel
+                                        shipped
                                     </Button>
                                 ) : (
                                     ''
@@ -111,4 +142,4 @@ const ManageOrder = () => {
     );
 };
 
-export default ManageOrder;
+export default ManageAllOrders;

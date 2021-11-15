@@ -24,7 +24,6 @@ const Login = () => {
         const info = { ...loginInfo };
         info[field] = value;
         setLoginInfo(info);
-        console.log(loginInfo);
     };
     const handleLoginForm = (e) => {
         emailLogin(loginInfo.email, loginInfo.password, history, location);

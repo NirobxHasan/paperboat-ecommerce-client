@@ -17,10 +17,14 @@ import { Switch, Route, Link, useRouteMatch } from 'react-router-dom';
 import Payment from '../Payment/Payment';
 import useAuth from '../../../hooks/useAuth';
 import { Button } from '@mui/material';
+import AddProduct from '../AddProduct/AddProduct';
+import MakeAdmin from '../MakeAdmin/MakeAdmin';
+import ManageProducts from '../ManageProducts/ManageProducts';
+import ManageAllOrders from '../ManageAllOrders/ManageAllOrders';
 const drawerWidth = 200;
 
 function UserDashboard(props) {
-    const { logOut } = useAuth();
+    const { admin, logOut } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -38,24 +42,60 @@ function UserDashboard(props) {
             <Toolbar />
             <Divider />
             <List>
-                <ListItem button>
-                    <Link style={style} to={`${url}`}>
-                        My Order
-                    </Link>
-                </ListItem>
-                <Divider />
-                <ListItem button>
-                    <Link style={style} to={`${url}/addreview`}>
-                        Add Review
-                    </Link>
-                </ListItem>
-                <Divider />
-                <ListItem button>
-                    <Link style={style} to={`${url}/payment`}>
-                        Payment
-                    </Link>
-                </ListItem>
-                <Divider />
+                {!admin && (
+                    <Box>
+                        <ListItem button>
+                            <Link style={style} to={`${url}`}>
+                                My Order
+                            </Link>
+                        </ListItem>
+                        <Divider />
+                        <ListItem button>
+                            <Link style={style} to={`${url}/addreview`}>
+                                Add Review
+                            </Link>
+                        </ListItem>
+                        <Divider />
+                        <ListItem button>
+                            <Link style={style} to={`${url}/payment`}>
+                                Payment
+                            </Link>
+                        </ListItem>
+                        <Divider />
+                    </Box>
+                )}
+
+                {/* admin section */}
+
+                {admin && (
+                    <Box>
+                        <ListItem button>
+                            <Link style={style} to={`${url}/manageAllOrder`}>
+                                Manage All orders
+                            </Link>
+                        </ListItem>
+                        <Divider />
+                        <ListItem button>
+                            <Link style={style} to={`${url}/addproduct`}>
+                                Add Product
+                            </Link>
+                        </ListItem>
+                        <Divider />
+                        <ListItem button>
+                            <Link style={style} to={`${url}/manageproduct`}>
+                                Manage Products
+                            </Link>
+                        </ListItem>
+                        <Divider />
+                        <ListItem button>
+                            <Link style={style} to={`${url}/makeadmin`}>
+                                Create admin
+                            </Link>
+                        </ListItem>
+                        <Divider />
+                    </Box>
+                )}
+
                 <ListItem button>
                     <Link style={style} to="/">
                         Home
@@ -101,7 +141,7 @@ function UserDashboard(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        User Dashboard
+                        Dashboard
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -156,7 +196,7 @@ function UserDashboard(props) {
 
                 <Switch>
                     <Route exact path={path}>
-                        <ManageOrder />
+                        {admin ? <ManageAllOrders /> : <ManageOrder />}
                     </Route>
                     <Route path={`${path}/addreview`}>
                         <AddReview />
@@ -164,6 +204,22 @@ function UserDashboard(props) {
                     <Route path={`${path}/payment`}>
                         <Payment />
                     </Route>
+                    {admin && (
+                        <Box>
+                            <Route path={`${path}/manageAllOrder`}>
+                                <ManageAllOrders />
+                            </Route>
+                            <Route path={`${path}/addproduct`}>
+                                <AddProduct />
+                            </Route>
+                            <Route path={`${path}/makeadmin`}>
+                                <MakeAdmin />
+                            </Route>
+                            <Route path={`${path}/manageproduct`}>
+                                <ManageProducts />
+                            </Route>
+                        </Box>
+                    )}
                 </Switch>
             </Box>
         </Box>
