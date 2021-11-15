@@ -1,12 +1,12 @@
 import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import useAuth from '../../../hooks/useAuth';
+
 const axios = require('axios');
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://ancient-mesa-81170.herokuapp.com/products')
             .then((res) => res.json())
             .then((data) => setProducts(data));
     }, []);
@@ -17,15 +17,17 @@ const ManageProducts = () => {
             return;
         }
 
-        axios.delete(`http://localhost:5000/products/${id}`).then((res) => {
-            console.log(res);
-            if (res.data.deletedCount === 1) {
-                const restOrder = products.filter(
-                    (product) => product._id !== id
-                );
-                setProducts(restOrder);
-            }
-        });
+        axios
+            .delete(`https://ancient-mesa-81170.herokuapp.com/products/${id}`)
+            .then((res) => {
+                console.log(res);
+                if (res.data.deletedCount === 1) {
+                    const restOrder = products.filter(
+                        (product) => product._id !== id
+                    );
+                    setProducts(restOrder);
+                }
+            });
     };
 
     return (
@@ -57,7 +59,7 @@ const ManageProducts = () => {
                                     gutterBottom
                                     component="div"
                                 >
-                                    {product.product_title}
+                                    {product.title}
                                 </Typography>
                                 <Typography
                                     variant="subtitle1"
@@ -66,13 +68,6 @@ const ManageProducts = () => {
                                     sx={{ fontWeight: 'bold' }}
                                 >
                                     Price: {product.price}
-                                </Typography>
-                                <Typography
-                                    variant="button"
-                                    display="block"
-                                    gutterBottom
-                                >
-                                    status: {product.status}
                                 </Typography>
                             </Box>
                         </Grid>

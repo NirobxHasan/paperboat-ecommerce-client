@@ -1,4 +1,4 @@
-import { Grid, TextField, Typography, createTheme } from '@mui/material';
+import { Grid, TextField, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import React from 'react';
@@ -14,15 +14,14 @@ const Footer = () => {
             }
         }
     });
-    const { footerLink, input } = useStyles();
+    const { footerLink } = useStyles();
 
     return (
         <Box
             sx={{
                 mt: 8,
                 backgroundColor: '#212121',
-                color: '#ffff',
-                mt: 8
+                color: '#ffff'
             }}
         >
             <Grid container spacing={2} sx={{ p: 5 }}>

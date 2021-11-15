@@ -1,15 +1,11 @@
 import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router';
 const axios = require('axios');
 const ManageAllOrders = () => {
     const [orders, setOrders] = useState([]);
-    const [shipped, setShipped] = useState(false);
-    const history = useHistory();
-    const location = useLocation();
     useEffect(() => {
-        fetch('http://localhost:5000/allOrders')
+        fetch('https://ancient-mesa-81170.herokuapp.com/allOrders')
             .then((res) => res.json())
             .then((data) => setOrders(data));
     }, []);
@@ -20,19 +16,21 @@ const ManageAllOrders = () => {
             return;
         }
 
-        axios.delete(`http://localhost:5000/orders/${id}`).then((res) => {
-            console.log(res);
-            if (res.data.deletedCount === 1) {
-                const restOrder = orders.filter(
-                    (product) => product._id !== id
-                );
-                setOrders(restOrder);
-            }
-        });
+        axios
+            .delete(`https://ancient-mesa-81170.herokuapp.com/orders/${id}`)
+            .then((res) => {
+                console.log(res);
+                if (res.data.deletedCount === 1) {
+                    const restOrder = orders.filter(
+                        (product) => product._id !== id
+                    );
+                    setOrders(restOrder);
+                }
+            });
     };
 
     const handleShipping = (id) => {
-        fetch(`http://localhost:5000/orders/${id}`, {
+        fetch(`https://ancient-mesa-81170.herokuapp.com/orders/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

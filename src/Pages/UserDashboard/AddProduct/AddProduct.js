@@ -4,19 +4,16 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 const axios = require('axios');
 const AddProduct = () => {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors }
-    } = useForm();
+    const { register, handleSubmit } = useForm();
 
     const onSubmit = (data) => {
-        axios.post('http://localhost:5000/products/', data).then((res) => {
-            if (res.data.insertedId) {
-                alert('Successfully added product!');
-            }
-        });
+        axios
+            .post('https://ancient-mesa-81170.herokuapp.com/products/', data)
+            .then((res) => {
+                if (res.data.insertedId) {
+                    alert('Successfully added product!');
+                }
+            });
     };
     const inputStyle = {
         display: 'block',

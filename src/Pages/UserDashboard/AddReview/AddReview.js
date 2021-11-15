@@ -6,7 +6,7 @@ import {
     Typography
 } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import StarIcon from '@mui/icons-material/Star';
 import { useHistory } from 'react-router';
@@ -30,10 +30,6 @@ const AddReview = () => {
     const [review, setReview] = useState('');
     const history = useHistory();
 
-    const handleReviewField = (e) => {
-        // const value = e.
-    };
-
     const handleForm = (e) => {
         const userReview = {};
         userReview.UserName = user.displayName;
@@ -41,12 +37,17 @@ const AddReview = () => {
         userReview.rating = value;
         userReview.review = review;
 
-        axios.post('http://localhost:5000/reviews/', userReview).then((res) => {
-            if (res.data.insertedId) {
-                alert('Successfully post review!');
-                history.push('/userdashboard');
-            }
-        });
+        axios
+            .post(
+                'https://ancient-mesa-81170.herokuapp.com/reviews/',
+                userReview
+            )
+            .then((res) => {
+                if (res.data.insertedId) {
+                    alert('Successfully post review!');
+                    history.push('/userdashboard');
+                }
+            });
         setReview('');
         console.log(userReview);
         e.preventDefault();

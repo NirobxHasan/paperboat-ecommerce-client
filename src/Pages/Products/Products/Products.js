@@ -1,13 +1,13 @@
-import { Container, Grid, Typography } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import product_img from '../../../images/products/2004.jpg';
+
 import Product from '../Product/Product';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://ancient-mesa-81170.herokuapp.com/products')
             .then((res) => res.json())
             .then((data) => setProducts(data));
     }, []);

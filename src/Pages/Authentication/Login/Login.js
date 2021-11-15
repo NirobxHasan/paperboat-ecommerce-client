@@ -2,7 +2,6 @@ import {
     Alert,
     Button,
     Container,
-    Grid,
     Paper,
     TextField,
     Typography
@@ -11,7 +10,6 @@ import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
-import useFirebase from '../../../hooks/useFirebase';
 
 const Login = () => {
     const [loginInfo, setLoginInfo] = useState({});

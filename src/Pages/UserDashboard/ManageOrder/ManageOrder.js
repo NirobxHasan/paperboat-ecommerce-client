@@ -7,7 +7,9 @@ const ManageOrder = () => {
     const [products, setProducts] = useState([]);
     const { user } = useAuth();
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user.email}`)
+        fetch(
+            `https://ancient-mesa-81170.herokuapp.com/orders?email=${user.email}`
+        )
             .then((res) => res.json())
             .then((data) => setProducts(data));
     }, []);
@@ -18,15 +20,17 @@ const ManageOrder = () => {
             return;
         }
 
-        axios.delete(`http://localhost:5000/orders/${id}`).then((res) => {
-            console.log(res);
-            if (res.data.deletedCount === 1) {
-                const restOrder = products.filter(
-                    (product) => product._id !== id
-                );
-                setProducts(restOrder);
-            }
-        });
+        axios
+            .delete(`https://ancient-mesa-81170.herokuapp.com/orders/${id}`)
+            .then((res) => {
+                console.log(res);
+                if (res.data.deletedCount === 1) {
+                    const restOrder = products.filter(
+                        (product) => product._id !== id
+                    );
+                    setProducts(restOrder);
+                }
+            });
     };
     return (
         <div>

@@ -12,7 +12,7 @@ const PurchaseProduct = () => {
     const { register, handleSubmit } = useForm();
     const history = useHistory();
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${id}`)
+        fetch(`https://ancient-mesa-81170.herokuapp.com/products/${id}`)
             .then((res) => res.json())
             .then((data) => setProduct(data));
     }, []);
@@ -25,12 +25,14 @@ const PurchaseProduct = () => {
         data.status = 'Pendding';
         console.log(data);
 
-        axios.post('http://localhost:5000/orders/', data).then((res) => {
-            if (res.data.insertedId) {
-                alert('Successfully added order!');
-                history.push('/home');
-            }
-        });
+        axios
+            .post('https://ancient-mesa-81170.herokuapp.com/orders/', data)
+            .then((res) => {
+                if (res.data.insertedId) {
+                    alert('Successfully added order!');
+                    history.push('/home');
+                }
+            });
     };
     const inputStyle = {
         display: 'block',

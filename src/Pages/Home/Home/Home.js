@@ -1,6 +1,4 @@
 import React from 'react';
-import Products from '../../Products/Products/Products';
-import Footer from '../../Shared/Footer/Footer';
 import Category from '../Category/Category';
 import HeaderBanner from '../HeaderBanner/HeaderBanner';
 import HomeProducts from '../HomeProducts/HomeProducts';

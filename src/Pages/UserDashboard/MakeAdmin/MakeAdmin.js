@@ -9,7 +9,7 @@ const MakeAdmin = () => {
     };
     const handleAdminform = (e) => {
         console.log(email);
-        fetch('http://localhost:5000/users/admin', {
+        fetch('https://ancient-mesa-81170.herokuapp.com/users/admin', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

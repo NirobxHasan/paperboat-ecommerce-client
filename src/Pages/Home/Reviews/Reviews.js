@@ -1,33 +1,11 @@
 import { Container, Grid, Paper, Rating, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
-// const reviews = [
-//     {
-//         useName: 'kodom ali',
-//         review: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique ex recusandae est odit enim, repellat vel ullam? Obcaecati, molestias laboriosam?',
-//         rating: 4
-//     },
-//     {
-//         useName: 'kodom ali',
-//         review: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique ex recusandae est odit enim, repellat vel ullam? Obcaecati, molestias laboriosam?',
-//         rating: 2
-//     },
-//     {
-//         useName: 'kodom ali',
-//         review: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique ex recusandae est odit enim, repellat vel ullam? Obcaecati, molestias laboriosam?',
-//         rating: 3
-//     },
-//     {
-//         useName: 'kodom ali',
-//         review: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique ex recusandae est odit enim, repellat vel ullam? Obcaecati, molestias laboriosam?',
-//         rating: 5
-//     }
-// ];
 const Reviews = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/reviews')
+        fetch('https://ancient-mesa-81170.herokuapp.com/reviews')
             .then((res) => res.json())
             .then((data) => setReviews(data));
     }, []);
